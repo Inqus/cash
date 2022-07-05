@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error page</title>
+    <meta charset="utf-8" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="text-center">
+        <h1 class="display-1 fw-bold" th:text="${httpStatus.value()}">Status</h1>
+        <p class="fs-3" th:text="${errorMessage}" >
+            The page you’re looking for doesn’t exist.
+        </p>
+        <p class="lead" th:text="${httpStatus.reasonPhrase}"><span class="text-danger">Opps!</span></p>
+        <a href="index.html" class="btn btn-primary" th:href="@{/}">Go Home</a>
+
+<!--        <h1 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|">404</h1>-->
+<!--        <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>-->
+<!--        <a href="index.html" th:href="@{/}">Back to Home Page</a>-->
+    </div>
+</div>
+</body>
+</html>
+
+
+

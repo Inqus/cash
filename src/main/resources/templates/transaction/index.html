@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <title>Bank Transfers</title>
+</head>
+<body>
+
+<section layout:fragment="content">
+
+        <h1>Last Transfers List</h1>
+        <div class="row">
+            <table class="table table-responsive table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">Id</a></th>
+                    <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=sum&sortDir=' + ${reverseSortDir}}">Amount</a></th>
+                    <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=phone&sortDir=' + ${reverseSortDir}}">Phone</a></th>
+                    <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=currency&sortDir=' + ${reverseSortDir}}"> Currency</a></th>
+                    <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=code&sortDir=' + ${reverseSortDir}}"> Code</a></th>
+                    <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=status&sortDir=' + ${reverseSortDir}}"> Status</a></th>
+                    <th> Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="transaction : ${listTransactions}">
+                    <td th:text="${transaction.id}"></td>
+                    <td th:text="${transaction.sum}"></td>
+                    <td th:text="${transaction.phone}"></td>
+                    <td th:text="${transaction.currency}"></td>
+                    <td th:text="${transaction.code}"></td>
+                    <td th:text="${transaction.status}"></td>
+
+                    <td><a th:if="${transaction.status == true}" th:href="@{/withdraw/{id}(id=${transaction.id})}" class="btn btn-primary">Withraw</a>
+<!--                        <a th:href="@{/delete/{id}(id=${transaction.id})}" class="btn btn-danger">Delete</a>-->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div th:if="${totalPages > 1}">
+                <div class="row col-sm-10">
+                    <div class="col-sm-5">
+                        Total Rows: [[${totalItems}]]
+                    </div>
+                    <div class="col-sm-3">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}"
+                           th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>
+					</span>
+                    </div>
+                    <div class="col-sm-1">
+                        <a th:if="${currentPage < totalPages}"
+                           th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                        <span th:unless="${currentPage < totalPages}">Next</span>
+                    </div>
+
+                    <div class="col-sm-1">
+                        <a th:if="${currentPage < totalPages}"
+                           th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                        <span th:unless="${currentPage < totalPages}">Last</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+</body>
+</html>

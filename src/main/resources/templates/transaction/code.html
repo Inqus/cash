@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <title>Withraw code</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 " >Generated code for withdraw </h1>
+        <h1 class="display-5 fw-bold" th:text="${code}"></h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Some important info for privacy</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a th:href="@{/}" type="button" class="btn btn-primary btn-lg px-4 gap-3">Back to List of transfers</a>
+                <a th:href="@{/add}"  type="button" class="btn btn-outline-secondary btn-lg px-4">Add transfer</a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
