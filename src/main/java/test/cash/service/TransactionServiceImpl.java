@@ -11,7 +11,6 @@ import test.cash.model.Transaction;
 import test.cash.model.User;
 import test.cash.repository.TransactionRepository;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
